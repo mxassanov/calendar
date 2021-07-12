@@ -1,26 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="uk-container uk-container-large">
+    <div class="uk-flex uk-flex-wrap">
+      <div v-for="(_, day) in 7" v-text="day" class="calendar-item"></div>
+      <div v-for="day in days" v-text="day" class="calendar-item"></div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    const currentDate = new Date()
+    const month = currentDate.getMonth()
+    const year = currentDate.getFullYear()
+    const days = getDaysOfMonth(month, year)
+    return {
+      days
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  .calendar-item {
+    width: calc(100% / 7)
+  }
 </style>
