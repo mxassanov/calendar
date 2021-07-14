@@ -1,5 +1,7 @@
-import CalendarApp from './CalendarApp'
+import CalendarSelector from './MonthSelector'
+import YearSelector from './YearSelector'
+import CalendarItem from './CalendarItem'
 
 export default [
-  CalendarApp
+  CalendarSelector, YearSelector, CalendarItem
 ]
