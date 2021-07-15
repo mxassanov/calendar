@@ -1,2 +1,2 @@
 # Calendar
-This is simple app created used Vue 3 and UIkit
+This app was created with Vue 3 and UIkit
