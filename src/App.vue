@@ -18,8 +18,16 @@
     <div class="uk-flex uk-flex-wrap">
       <div v-for="(_, i) in 7" v-text="weekdayName(i)" class="calendar-item"></div>
       <div v-for="day in days" class="calendar-item">
-        <calendar-item :date="day" v-if="day"></calendar-item>
+        <calendar-item :date="day"
+                       v-if="day"
+                       @add-task="newTask = {initDate: day}"
+        ></calendar-item>
       </div>
+      <task-form
+          :new-task="newTask"
+          :add-task="addTask"
+      >
+      </task-form>
     </div>
   </div>
 </template>
@@ -29,8 +37,9 @@ export default {
   name: 'App',
   data() {
     return {
-      days: [],
-      selectorDate: new Date()
+      selectorDate: new Date(),
+      newTask: null,
+      tasks: [],
     }
   },
   watch: {
@@ -65,6 +74,23 @@ export default {
       d.setFullYear(d.getFullYear() + diff)
       this.selectorDate = d
     },
+    newTaskObj(date) {
+      return {
+        date
+      }
+    },
+    addTask(formModel) {
+      const date = new Date(formModel.date)
+      date.setHours(formModel.hours)
+      date.setMinutes(formModel.minutes)
+
+      const task = this.newTaskObj(date)
+      task.title = formModel.title
+      task.description = formModel.description
+      task.finished = formModel.finished
+
+      this.tasks = this.tasks.concat([task])
+    }
   },
 }
 </script>
